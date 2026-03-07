@@ -1,30 +1,30 @@
-#National Park Locator 🌲
+# National Park Locator 🌲
 
 A responsive web application that helps users discover U.S. National Parks, explore park information, and quickly find parks near their location.
 
 Built using React + Vite for fast development and optimized builds, this application integrates multiple APIs to deliver location-based park discovery and detailed park information.
 
-##Features
-###🌍 Find Parks Near You
+## Features
+### 🌍 Find Parks Near You
 
 Users can enter their ZIP code to locate national parks near them.
 The app uses a Geocoding API to convert the ZIP code into latitude and longitude coordinates, which are then used to calculate distances between the user and nearby parks.
 
 Nearby parks are automatically sorted by distance and displayed in an easy-to-browse card layout.
 
-###⭐ Featured Parks
+### ⭐ Featured Parks
 
 The app also highlights featured parks based on the number of activities available at each park.
 
 Parks with the highest number of activities (such as hiking, camping, wildlife viewing, etc.) are surfaced as featured destinations, helping users discover parks with the most things to do.
 
-###🔎 Park Search
+### 🔎 Park Search
 
 A built-in search bar allows users to search for any national park.
 
 When a park is selected, the application routes the user to a dedicated page using the park’s parkCode, displaying detailed information about that specific park.
 
-###📄 Detailed Park Pages
+### 📄 Detailed Park Pages
 
 Clicking on any park card navigates users to a dedicated park details page which includes:
 
@@ -40,7 +40,7 @@ Link to the official National Park website for reservations and additional infor
 
 Routing is handled dynamically so each park has its own unique page.
 
-##Tech Stack
+## Tech Stack
 
 React
 
@@ -50,7 +50,7 @@ JavaScript (ES6+)
 
 Responsive CSS / Flexbox
 
-##APIs Used
+## APIs Used
 National Park Service API
 
 Provides park data including:
@@ -85,7 +85,7 @@ Mobile devices
 
 The layout adjusts dynamically to provide a clean browsing experience on any screen size.
 
-###What This App Helps With
+### What This App Helps With
 
 This application helps users:
 
