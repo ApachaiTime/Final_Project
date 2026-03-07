@@ -1,0 +1,161 @@
+.modal {
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(33, 33, 33, 0.4);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s linear;
+}
+
+.modal__opened {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal__container {
+  position: relative;
+  left: 168px;
+  top: -310px;
+  z-index: 3;
+}
+
+.modal__content {
+  position: absolute;
+  right: 0;
+  background-color: #102210;
+  border-radius: 66px;
+  padding: 30px;
+  width: 280px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal__title {
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-size: 1.5em;
+  margin: 0 0 10px 0;
+}
+
+.modal__close__btn {
+  position: absolute;
+  top: 35px;
+  left: 20px;
+  background: transparent;
+  border-style: none;
+  cursor: pointer;
+}
+
+.modal__profile__btn {
+  position: relative;
+  background: transparent;
+  border-style: dashed;
+  border-radius: 50%;
+  padding: 0;
+  width: 128px;
+  height: 128px;
+  border-color: #13ec13;
+
+  cursor: pointer;
+}
+.modal__profile__input {
+  font-family: "Lora", serif;
+  font-weight: 400;
+  font-size: 0.8em;
+  color: #0fb30f;
+}
+.modal__add__img {
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  right: -10px;
+  bottom: -10px;
+}
+
+.modal__text {
+  font-family: "Lora", serif;
+  font-weight: 400;
+  font-size: 0.8em;
+  color: #13ec13;
+  text-align: center;
+}
+.modal__profile__img {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px dashed #13ec13;
+}
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  width: fit-content;
+}
+
+.modal__label {
+  font-family: "Lora", serif;
+  font-weight: 400;
+  font-size: 0.9em;
+  color: #fff;
+  margin: 0;
+  margin-right: auto;
+}
+
+.modal__input {
+  font-family: "Lora", serif;
+  font-weight: 400;
+  font-size: 0.9em;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #102910;
+  opacity: 90%;
+  border-style: solid;
+  border-color: #13ec13;
+  border-width: 1px;
+  width: fit-content;
+}
+
+.modal__submit__btn {
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-size: 0.9em;
+  cursor: pointer;
+  width: 220px;
+  background: #0fb30f;
+  border-style: none;
+  padding: 20px 20px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.modal__submit__btn:hover {
+  background-color: #1ed41e;
+}
+
+@media screen and (min-width: 850px) {
+  .modal__container {
+    position: relative;
+    left: 320px;
+  }
+
+  .modal__content {
+    width: 600px;
+    padding: 40px;
+  }
+
+  .modal__input {
+    width: 350px;
+  }
+}
