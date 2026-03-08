@@ -27,10 +27,12 @@ export default function Header({
           {location.pathname !== "/" ? (
             <button className="header__logo">
               <img src={logo} alt="Logo" />
+              National Park Explorer
             </button>
           ) : (
             <button className="header__logo header__logo-active">
               <img src={logo} alt="Logo" />
+              National Park Explorer
             </button>
           )}
         </Link>

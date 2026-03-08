@@ -18,7 +18,6 @@ function Activities({ parks }) {
 
     const popularActivities = getPopularActivities(parks);
     setActivities(popularActivities);
-    console.log(activities);
   }, [parks]);
 
   function getActivityImg(activityName) {

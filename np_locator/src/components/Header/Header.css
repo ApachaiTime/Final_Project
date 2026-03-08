@@ -14,12 +14,25 @@
 }
 
 .header__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-size: 1.2em;
   cursor: pointer;
   background: transparent;
   border-style: none;
 }
+.header__left a {
+  text-decoration: none;
+}
 
 .header__logo-active {
+  align-items: center;
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-size: 1.2em;
   color: #13ec13;
   border-bottom: solid;
   border-width: 1px;
@@ -56,7 +69,7 @@
   font-family: "Lora", serif;
   font-weight: 400;
   font-size: 1.1em;
-  max-width:  150px;
+  max-width: 150px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -12,9 +12,15 @@
   position: absolute;
   width: 286px;
   height: 400px;
-  background-color: black;
+  background: #a3a3a3;
+  background: linear-gradient(
+    180deg,
+    rgba(223, 223, 223, 0.92) 0%,
+    rgb(39, 39, 39) 30%,
+    rgba(0, 0, 0, 1) 100%
+  );
   z-index: 1;
-  opacity: 30%;
+  opacity: 50%;
   border-radius: 10%;
 }
 
