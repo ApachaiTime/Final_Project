@@ -1,0 +1,59 @@
+.sidebar__content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  width: 250px;
+  height: 100%;
+}
+
+.rdp-nav {
+  display: flex;
+  justify-content: end;
+}
+
+.rdp-button_previous {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.rdp-chevron {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
+
+.rdp-button_next {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.rdp-month {
+  position: relative;
+  padding-top: 10px;
+}
+
+.rdp-month_caption {
+position: absolute;
+top: -25px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.rdp-weekday {
+  font-size: 0.8em;
+    opacity: 0.4;
+}
+
+.rdp-day_button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+}

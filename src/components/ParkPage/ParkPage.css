@@ -1,0 +1,168 @@
+.park-page {
+  position: relative;
+  display: flex;
+  background-color: #102210;
+}
+
+
+
+.park-page__img {
+  max-height: 110vh;
+  width: 74vw;
+  border-radius: 0 50px 50px 0;
+  box-sizing: border-box;
+}
+
+.park-page__back__btn {
+  cursor: pointer;
+  background: transparent;
+  border-style: none;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+
+.park-page__distance {
+  font-family: "Lora", serif;
+  font-weight: 400;
+  color: #13ec13;
+  background-color: #163a16;
+  margin: 0;
+  height: fit-content;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 32px;
+}
+
+.park-page__info {
+  padding: 30px;
+  display: flex;
+  width: 20vw;
+  flex-direction: column;
+  color: white;
+}
+
+.park-page__span {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.park-page__indicator {
+  background-color: #13ec13;
+  width: 7px;
+  height: 20px;
+  border-radius: 29%;
+}
+
+.park-page__title {
+  font-family: "Lora", serif;
+  font-weight: 700;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.park-page__loc__img {
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+}
+
+.park-page__address__block {
+  font-family: "Lora", serif;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  opacity: 70%;
+}
+
+.park-page__activities {
+  font-family: "Lora", serif;
+  font-weight: 400;
+  font-size: 0.9em;
+  margin-top: 12px;
+  flex-wrap: wrap;
+  max-width: 400px;
+  display: flex;
+  gap: 8px;
+  bottom: 5px;
+  right: 45px;
+}
+
+.park-page__activities p {
+  background: rgba(150, 150, 150, 0.24);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.park-page__description {
+  padding-left: 20px;
+  margin-top: 25px;
+  opacity: 70%;
+  font-family: "Lora", serif;
+  font-weight: 400;
+}
+
+.park-page__list {
+  list-style: none;
+  padding: 0;
+  justify-content: flex-start;
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.park-page__item {
+  color: #13ec13;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #121f13;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid #585858;
+}
+
+.park-page__item__text {
+  font-family: "Lora", serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+.park-page__item__img {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+}
+
+.park-page__btn {
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-size: 1em;
+  background-color: #13ec13;
+  color: black;
+  border: none;
+  padding: 20px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.park-page__btn:hover {
+  background-color: #1ed41e;
+}
+
+@media screen and (max-width: 1050px) {
+  .park-page {
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+  }
+  .park-page__img {
+    width: 100vw;
+    border-radius: 0;
+  }
+  .park-page__info {
+    padding: 10px;
+    width: 93vw;
+  }
+}

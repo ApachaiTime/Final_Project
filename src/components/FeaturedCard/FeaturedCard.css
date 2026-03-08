@@ -1,0 +1,73 @@
+.feature-park__list {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
+}
+
+.feature-park__overlay {
+  cursor: pointer;
+  position: absolute;
+  width: 286px;
+  height: 400px;
+  background: #a3a3a3;
+  background: linear-gradient(
+    180deg,
+    rgba(223, 223, 223, 0.92) 0%,
+    rgb(39, 39, 39) 30%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  z-index: 1;
+  opacity: 50%;
+  border-radius: 10%;
+}
+
+.feature-park__overlay:hover {
+  opacity: 5%;
+}
+
+.feature-park__item {
+  position: relative;
+  width: 286px;
+  height: 400px;
+}
+
+.feature-park__img {
+  width: 286px;
+  height: 400px;
+  border-radius: 10%;
+  object-fit: cover;
+}
+
+.feature-park__title {
+  color: rgb(207, 173, 240);
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-size: 1.1em;
+  position: absolute;
+  z-index: 2;
+  bottom: 30px;
+  left: 8px;
+  padding-left: 5px;
+}
+.feature-park__location {
+  color: rgb(207, 173, 240);
+  font-family: "Lora", serif;
+  font-weight: 400;
+  font-size: 1em;
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  bottom: 10px;
+  left: 36px;
+}
+.feature-park__location__img {
+  position: absolute;
+  z-index: 2;
+  height: 20px;
+  width: 20px;
+  left: 15px;
+  bottom: 10px;
+}

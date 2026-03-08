@@ -1,0 +1,15 @@
+.app {
+  box-sizing: border-box;
+}
+
+.app__content {
+  padding: 17px 8% 0;
+}
+
+
+@media screen and (max-width: 1000px) {
+
+.app {
+    padding: 17px 0% 0;
+}
+  }
