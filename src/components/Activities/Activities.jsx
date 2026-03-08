@@ -12,10 +12,6 @@ import { useEffect, useState } from "react";
 function Activities({ parks }) {
   const [activities, setActivities] = useState([]);
   useEffect(() => {
-    if (parks == [1]) {
-      return;
-    }
-
     const popularActivities = getPopularActivities(parks);
     setActivities(popularActivities);
   }, [parks]);
@@ -34,7 +30,7 @@ function Activities({ parks }) {
   return (
     <ul className="activities__list">
       {activities.map((activity) => (
-        <li className="activities__item">
+        <li key={activity} className="activities__item">
           <p className="activity">
             <img
               className="activity__img"
