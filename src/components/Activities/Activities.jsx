@@ -12,8 +12,7 @@ import { useEffect, useState } from "react";
 function Activities({ parks }) {
   const [activities, setActivities] = useState([]);
   useEffect(() => {
-    const popularActivities = getPopularActivities(parks);
-    setActivities(popularActivities);
+    setActivities(getPopularActivities(parks));
   }, [parks]);
 
   function getActivityImg(activityName) {
@@ -35,7 +34,7 @@ function Activities({ parks }) {
             <img
               className="activity__img"
               src={getActivityImg(activity)}
-              alt=""
+              alt="Activity icon"
             />
             {activity}
           </p>

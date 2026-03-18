@@ -28,11 +28,11 @@
 
 .modal__content {
   position: absolute;
-  right: 0;
+  right: 25px;
   background-color: #102210;
   border-radius: 66px;
-  padding: 30px;
-  width: 280px;
+  padding: 20px;
+  width: 250px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -46,7 +46,7 @@
   margin: 0 0 10px 0;
 }
 
-.modal__close__btn {
+.modal__close-btn {
   position: absolute;
   top: 35px;
   left: 20px;
@@ -55,7 +55,7 @@
   cursor: pointer;
 }
 
-.modal__profile__btn {
+.modal__profile-btn {
   position: relative;
   background: transparent;
   border-style: dashed;
@@ -64,10 +64,11 @@
   width: 128px;
   height: 128px;
   border-color: #13ec13;
-
   cursor: pointer;
 }
 .modal__profile__input {
+  width: fit-content;
+  margin-left: 10px;
   font-family: "Lora", serif;
   font-weight: 400;
   font-size: 0.8em;
@@ -127,7 +128,7 @@
   width: fit-content;
 }
 
-.modal__submit__btn {
+.modal__submit-btn {
   font-family: "Lora", serif;
   font-weight: 700;
   font-size: 0.9em;
@@ -140,7 +141,7 @@
   color: #fff;
 }
 
-.modal__submit__btn:hover {
+.modal__submit-btn:hover {
   background-color: #1ed41e;
 }
 

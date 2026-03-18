@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Await, Route, Routes } from "react-router-dom";
 import { LandscapeImageContext } from "../../contexts/LandScapeImageContext.js";
 import { getAvatar, getUserName, getUserZip } from "../../utils/userData.js";
 import {
@@ -12,6 +12,7 @@ import Main from "../Main/Main.jsx";
 import Header from "../Header/Header.jsx";
 import ParkPage from "../ParkPage/ParkPage.jsx";
 import UserModal from "../UserModal/UserModal.jsx";
+import { MobileModal } from "../MobileModal/MobileModal.jsx";
 import getLatLongFromZip from "../../utils/geocode.js";
 function App() {
   const [parks, setParks] = useState([]);
@@ -23,43 +24,49 @@ function App() {
   const [headerPic, setHeaderPic] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [isMobileMenuOpened, setisMobileMenuOpened] = useState(false);
+  const [getError, setError] = useState("");
+
   useEffect(() => {
-    if (getUserName() !== null && getUserZip() !== null) {
-      setCurrentUser(getUserName());
-      const userCoords = getLatLongFromZip(getUserZip());
+    const userName = getUserName();
+    const userZip = getUserZip();
+
+    // If user has BOTH values, fetch for their location
+    if (userZip !== null) {
+      const userCoords = getLatLongFromZip(userZip);
       userCoords
         .then((coords) => {
           if (!coords) {
-            setError("Cloudn't find coordinates for that ZIP");
+            setError("Couldn't find coordinates for that ZIP");
             return;
           }
           setLoading(true);
-
           return getParkData(coords);
         })
         .then((allParks) => {
+          setCurrentUser(userName || "John Doe");
           setParks(allParks);
           setClosest(getNearbyParks(allParks));
           setFeatured(getFeaturedParks(allParks));
           setLoading(false);
         })
-        .catch((err) => {
-          console.error(err);
+        .catch((error) => {
           setError("Something went wrong loading parks.");
+          console.error(error);
           setLoading(false);
         });
     }
-    if (getUserName() == null && getUserZip() == null) {
+    // If no ZIP, show default parks
+    else {
       getParkData()
         .then((allParks) => {
           setParks(allParks);
           setClosest(getNearbyParks(allParks));
           setFeatured(getFeaturedParks(allParks));
         })
-        .catch((err) => {
-          console.error(err);
+        .catch((error) => {
           setError("Something went wrong loading parks.");
+          console.error(error);
           setLoading(false);
         });
     }
@@ -132,6 +139,10 @@ function App() {
     setProfilePicUrl(getAvatar());
   }
 
+  const toggleMobileMenu = () => {
+    setisMobileMenuOpened(!isMobileMenuOpened);
+  };
+
   useEffect(() => {
     if (!activeModal) return;
     const handleEscClose = (e) => {
@@ -174,12 +185,13 @@ function App() {
         setParks(allParks);
         setClosest(getNearbyParks(allParks));
         setFeatured(getFeaturedParks(allParks));
-        setLoading(false);
         handleCloseModal();
+        setLoading(false);
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
         setError("Something went wrong loading parks.");
+        console.error(error);
+        console.error("Error messeage for user", getError);
         setLoading(false);
       });
   }
@@ -188,6 +200,7 @@ function App() {
     <LandscapeImageContext.Provider value={getLandscapeImage}>
       <div className="app">
         <Header
+          toggleMobileMenu={toggleMobileMenu}
           handleOpenUserModal={handleOpenUserModal}
           parks={parks}
           currentUser={currentUser}
@@ -222,6 +235,15 @@ function App() {
         selectedFile={selectedFile}
         setSelectedFile={setSelectedFile}
         setHeaderPic={setHeaderPic}
+      />
+      <MobileModal
+        isMobileModalOpened={isMobileMenuOpened}
+        handleOpenUserModal={handleOpenUserModal}
+        onClose={toggleMobileMenu}
+        parks={parks}
+        getLandscapeImage={getLandscapeImage}
+        headerPic={headerPic}
+        currentUser={currentUser}
       />
     </LandscapeImageContext.Provider>
   );

@@ -31,7 +31,7 @@
   right: 0;
 }
 
-.park-search__btn {
+.park-search-btn {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -43,8 +43,8 @@
   object-fit: cover;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 750px) {
 .park-search__input {
-    width: 150px;
+    width: fit-content;
 }
   }

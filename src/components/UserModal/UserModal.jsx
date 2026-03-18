@@ -1,8 +1,8 @@
 import "./UserModal.css";
 import { getUserName, getUserZip, getAvatar } from "../../utils/userData.js";
 import { useForm } from "../../hooks/useForm";
-import avatarIcon from "../../assets/avatar_icon.png";
-import greenBackIcon from "../../assets/green_back_icon.png";
+import avatarIcon from "../../assets/avatar_icon.svg";
+import greenBackIcon from "../../assets/green_back_icon.svg";
 import { useEffect } from "react";
 export default function UserModal({
   onClose,
@@ -22,21 +22,19 @@ export default function UserModal({
     zip: "",
   });
   useEffect(() => {
-    if (getAvatar() !== null) {
-      setProfilePicUrl(getAvatar());
-    }
-    if (getUserName() == null && getUserZip() == null) {
-      setCurrentUser("John Doe");
-      setValues({
-        username: "John Doe",
-        zip: "75287",
-      });
-    }
-    if (getUserName() !== null && getUserZip() !== null) {
-      setValues({
-        username: getUserName(),
-        zip: getUserZip(),
-      });
+    const userName = getUserName();
+    const userZip = getUserZip();
+    const userAvatar = getAvatar();
+    let defaultValues = {
+      username: userName || "John Doe",
+      zip: userZip || "75287",
+    };
+
+    setValues(defaultValues);
+    setCurrentUser(userName || "John Doe");
+
+    if (userAvatar !== null) {
+      setProfilePicUrl(userAvatar);
     }
   }, []);
   const onFormSubmit = (e) => {
@@ -64,7 +62,7 @@ export default function UserModal({
     >
       <div className="modal__container">
         <div className="modal__content">
-          <button className="modal__close__btn" onClick={onClose}>
+          <button className="modal__close-btn" onClick={onClose}>
             <img src={greenBackIcon} alt="Close button" />
           </button>
           <h2 className="modal__title">User Profile</h2>
@@ -94,6 +92,7 @@ export default function UserModal({
               id="username"
               name="username"
               className="modal__input"
+              placeholder="Username"
               onChange={handleChange}
               value={values.username}
             />
@@ -110,11 +109,12 @@ export default function UserModal({
               id="zip"
               name="zip"
               className="modal__input"
+              placeholder="Zip code"
               onChange={handleChange}
               value={values.zip}
             />
             <p className="modal__input__note"></p>
-            <button type="submit" className="modal__submit__btn">
+            <button type="submit" className="modal__submit-btn">
               {buttonText}
             </button>
           </form>

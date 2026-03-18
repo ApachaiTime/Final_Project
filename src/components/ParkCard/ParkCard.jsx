@@ -11,7 +11,7 @@ function ParkCard({ park }) {
     .map((activity, index) => <p key={index}>{activity.name}</p>);
   return (
     <Link to={`/park/${park.parkCode}`}>
-      <div className="park-card__container">
+      <article className="park-card__container">
         <li className="park-card__item">
           <h2 className="park-card__title">{park.fullName}</h2>
           <p className="park-card__description">{park.description}</p>
@@ -27,7 +27,7 @@ function ParkCard({ park }) {
 
           <p className="park-card__text">Explore &#x2192; </p>
         </li>
-      </div>
+      </article>
     </Link>
   );
 }

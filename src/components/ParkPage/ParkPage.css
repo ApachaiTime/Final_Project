@@ -4,8 +4,6 @@
   background-color: #102210;
 }
 
-
-
 .park-page__img {
   max-height: 110vh;
   width: 74vw;
@@ -13,7 +11,7 @@
   box-sizing: border-box;
 }
 
-.park-page__back__btn {
+.park-page__back-btn {
   cursor: pointer;
   background: transparent;
   border-style: none;
@@ -135,7 +133,7 @@
   margin-left: 5px;
 }
 
-.park-page__btn {
+.park-page-btn {
   font-family: "Lora", serif;
   font-weight: 700;
   font-size: 1em;
@@ -147,22 +145,31 @@
   cursor: pointer;
   margin-top: 20px;
 }
-.park-page__btn:hover {
+.park-page-btn:hover {
   background-color: #1ed41e;
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1400px) {
   .park-page {
     flex-direction: column;
     align-items: center;
     padding: 0px;
   }
   .park-page__img {
-    width: 100vw;
+    width: 100%;
     border-radius: 0;
   }
   .park-page__info {
     padding: 10px;
-    width: 93vw;
+    width: 89vw;
   }
+
+  .park-page__list {
+    flex-direction: column;
+  }
+
+  .park-page__item {
+width: 230px
+  }
+
 }

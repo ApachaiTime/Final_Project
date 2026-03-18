@@ -29,8 +29,8 @@ export default function ParkPage({ parks }) {
     }
   }
   return (
-    <div className="park-page">
-      <button className="park-page__back__btn" onClick={() => navigate(-1)}>
+    <section className="park-page">
+      <button className="park-page__back-btn" onClick={() => navigate(-1)}>
         <img src={backBtn} alt="Back button" />
       </button>
       <img
@@ -48,7 +48,7 @@ export default function ParkPage({ parks }) {
 
           <h1 className="park-page__title">{park?.fullName}</h1>
         </span>
-        <span className="park-page__address__block">
+        <div className="park-page__address__block">
           <img
             src={locationIcon}
             alt="Location icon"
@@ -58,7 +58,7 @@ export default function ParkPage({ parks }) {
             {park?.address?.line1} {park?.address?.city},{" "}
             {park?.address?.stateCode}, {park?.address?.postalCode}
           </div>
-        </span>
+        </div>
         <div className="park-page__activities"> {parkActivities}</div>
         <p className="park-page__description">{park?.description}</p>
         <span className="park-page__span">
@@ -85,10 +85,10 @@ export default function ParkPage({ parks }) {
             {parkOpenStatusAndHours()}
           </li>
         </ul>
-        <button className="park-page__btn" onClick={() => handleButtonClick()}>
+        <button className="park-page-btn" onClick={() => handleButtonClick()}>
           Plan your trip &#x2192;
         </button>
       </div>
-    </div>
+    </section>
   );
 }

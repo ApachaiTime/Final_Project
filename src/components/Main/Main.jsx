@@ -5,7 +5,7 @@ import { FeaturedCard } from "../FeaturedCard/FeaturedCard";
 import { ParkCard } from "../ParkCard/ParkCard";
 export default function Main({ featured, closest, parks }) {
   return (
-    <div className="main__content">
+    <section className="main__content">
       <span className="main__span">
         <div className="main__text__indicator"></div>
         <h2 className="main__text">Most Popular Activities</h2>
@@ -36,6 +36,6 @@ export default function Main({ featured, closest, parks }) {
           );
         })}
       </ul>
-    </div>
+    </section>
   );
 }

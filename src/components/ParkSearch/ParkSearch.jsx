@@ -1,7 +1,7 @@
 import "./ParkSearch.css";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-export function ParkSearch({ parks, park, getLandscapeImage }) {
+export function ParkSearch({ parks, getLandscapeImage }) {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ export function ParkSearch({ parks, park, getLandscapeImage }) {
         <div className="park-search__suggestions">
           {suggestions.map((p) => (
             <button
-              className="park-search__btn"
+              className="park-search-btn"
               key={p.parkCode}
               type="button"
               onClick={() => {
@@ -35,7 +35,11 @@ export function ParkSearch({ parks, park, getLandscapeImage }) {
               }}
             >
               {p.fullName}
-              <img className="park-search__img" src={getLandscapeImage(p)} alt="" />
+              <img
+                className="park-search__img"
+                src={getLandscapeImage(p)}
+                alt="Parks image"
+              />
             </button>
           ))}
         </div>

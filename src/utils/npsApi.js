@@ -40,7 +40,6 @@ function getParkData(userCoords) {
   return fetch(npsUrl)
     .then(checkResponse)
     .then((json) => {
-      // console.log(json.data);
       return json.data.map((park) => {
         const coords = parseLatLng(park.latLong);
         const distanceMiles = coords

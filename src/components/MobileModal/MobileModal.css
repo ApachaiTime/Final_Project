@@ -1,0 +1,42 @@
+.mobile__modal {
+  display: none;
+  position: fixed;
+  margin: auto;
+  top: 10px;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  background-color: #162616;
+  border-radius: 30px;
+  padding: 25px;
+  width: 80vw;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.mobile__modal-opened {
+  display: flex;
+}
+
+.mobile__content {
+
+  width: 200px;
+  margin: auto;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 25px;
+}
+
+.mobile__back-btn {
+  cursor: pointer;
+  background: transparent;
+  border-style: none;
+  position: absolute;
+  left: 5px;
+  top: 10px;
+}
+
+.mobile__back-img {
+  width: 32px;
+  height: 32px;
+}
