@@ -14,6 +14,7 @@
 }
 
 .header__logo {
+      margin: 0;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -29,15 +30,20 @@
 }
 
 .header__logo-active {
+  margin: 0;
   align-items: center;
   font-family: "Lora", serif;
   font-weight: 700;
   font-size: 1.2em;
   color: #13ec13;
   border-bottom: solid;
-  border-width: 1px;
+  border-width: 2px;
   margin-top: 10px;
-  padding-bottom: 15px;
+  padding-bottom: 6px;
+}
+
+.header__logo__text {
+margin: 12px 12px 12px 0;
 }
 
 .header__logo:hover {
@@ -101,7 +107,7 @@
 @media screen and (max-width: 1000px) {
   .header {
     justify-content: center;
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     margin-left: auto;
     flex-direction: column;
   }
@@ -116,6 +122,7 @@
 
   .header__logo {
     margin: 0;
+    padding-bottom: 12px;
   }
 
   .header__logo__text {
