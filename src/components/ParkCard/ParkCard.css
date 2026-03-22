@@ -127,9 +127,10 @@
     -webkit-line-clamp: 3;
   }
   .park-card__img {
-    top: -15px;
-        left: -14px;
-          width: 278px;
+    top: -9px;
+    left: -8px;
+    width: 265px;
+    
   }
 
   .park-card__activities {
@@ -151,7 +152,7 @@
 
   .park-card__distance {
     position: absolute;
-            top: 356px;
+    top: 356px;
     left: -3px;
   }
 

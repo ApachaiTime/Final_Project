@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Await, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { LandscapeImageContext } from "../../contexts/LandScapeImageContext.js";
 import { getAvatar, getUserName, getUserZip } from "../../utils/userData.js";
 import {

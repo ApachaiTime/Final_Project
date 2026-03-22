@@ -13,6 +13,7 @@ export default function ParkPage({ parks }) {
     park?.activities
       ?.slice(0, 10)
       .map((activity, index) => <p key={index}>{activity.name}</p>) || [];
+
   const today = new Date()
     .toLocaleString("default", {
       weekday: "long",
@@ -20,7 +21,7 @@ export default function ParkPage({ parks }) {
     .toLocaleLowerCase();
   function parkOpenStatusAndHours() {
     const hoursForToday = park?.operatingHours?.[today];
-    return `${hoursForToday}`;
+    return `${hoursForToday}` ?? "No hours available";
   }
 
   function handleButtonClick() {
@@ -34,7 +35,7 @@ export default function ParkPage({ parks }) {
         <img src={backBtn} alt="Back button" />
       </button>
       <img
-        src={park?.images?.[0]?.url ?? ""}
+        src={park?.images?.[0]?.url ?? null}
         alt={park?.fullName ?? "Park Image"}
         className="park-page__img"
       />
@@ -46,7 +47,9 @@ export default function ParkPage({ parks }) {
         <span className="park-page__span">
           <div className="park-page__indicator"></div>
 
-          <h1 className="park-page__title">{park?.fullName}</h1>
+          <h1 className="park-page__title">
+            {park ? park?.fullName : "Data is loading..."}
+          </h1>
         </span>
         <div className="park-page__address__block">
           <img
@@ -73,7 +76,9 @@ export default function ParkPage({ parks }) {
               alt="Phone Icon"
               className="park-page__item__img"
             />
-            <p className="park-page__item__text">{park?.contact}</p>
+            <p className="park-page__item__text">
+              {park ? park?.contact : "Data is loading..."}
+            </p>
           </li>
 
           <li className="park-page__item">
@@ -82,7 +87,9 @@ export default function ParkPage({ parks }) {
               alt="Hours Icon"
               className="park-page__item__img"
             />
-            {parkOpenStatusAndHours()}
+            <p className="park-page__item__text">
+              {park ? parkOpenStatusAndHours() : "Data is loading..."}
+            </p>
           </li>
         </ul>
         <button className="park-page-btn" onClick={() => handleButtonClick()}>
