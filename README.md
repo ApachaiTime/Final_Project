@@ -73,7 +73,7 @@ Geocoding API
 
 Used to convert ZIP codes into geographic coordinates (latitude and longitude), allowing the application to calculate distances and locate nearby parks.
 
-##Responsive Design
+## Responsive Design
 
 The application is fully responsive and designed to work across:
 
