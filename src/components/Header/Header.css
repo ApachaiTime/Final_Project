@@ -1,0 +1,157 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #0a0f0a;
+  box-sizing: border-box;
+  padding: 17px 24px;
+  height: 65px;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header__logo {
+      margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-size: 1.2em;
+  cursor: pointer;
+  background: transparent;
+  border-style: none;
+}
+.header__left a {
+  text-decoration: none;
+}
+
+.header__logo-active {
+  margin: 0;
+  align-items: center;
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-size: 1.2em;
+  color: #13ec13;
+  border-bottom: solid;
+  border-width: 2px;
+  margin-top: 10px;
+  padding-bottom: 6px;
+}
+
+.header__logo__text {
+margin: 12px 12px 12px 0;
+}
+
+.header__logo:hover {
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header__profile {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-left: 20px;
+  background-color: transparent;
+  border-width: 0 0 0 2px;
+  border-style: dashed;
+  border-color: #414141;
+  cursor: pointer;
+}
+
+.header__profile__text {
+  margin: 0;
+  padding-left: 8px;
+  font-family: "Lora", serif;
+  font-weight: 400;
+  font-size: 1.1em;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header__profile__avatar {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.header__mobile-btn {
+  display: none;
+  background: transparent;
+  border-style: none;
+  cursor: pointer;
+  position: absolute;
+  padding: 0;
+  right: 0px;
+  top: -3px;
+}
+
+.header__mobile-img {
+  width: 70px;
+  height: 70px;
+}
+
+@media screen and (max-width: 1000px) {
+  .header {
+    justify-content: center;
+    padding: 10px 10px 0 10px;
+    margin-left: auto;
+    flex-direction: column;
+  }
+
+  .header__mobile-btn {
+    display: block;
+  }
+
+  .header__logo-active {
+    margin: 0;
+  }
+
+  .header__logo {
+    margin: 0;
+    padding-bottom: 12px;
+  }
+
+  .header__logo__text {
+    display: none;
+  }
+  .header__right {
+    display: none;
+  }
+
+  .header__profile {
+    padding-left: 8px;
+
+    width: 200px;
+    border-style: dashed;
+    border-width: 0 0 2px 0;
+    border-color: #13ec13;
+    padding-bottom: 18px;
+  }
+
+  .header__profile:hover {
+    color: #13ec13;
+  }
+
+  .header__profile__avatar {
+    width: 62px;
+    height: 62px;
+  }
+
+  .header__profile__text {
+    font-size: 1.3em;
+  }
+}
