@@ -3,7 +3,7 @@ import { ParkSearch } from "../ParkSearch/ParkSearch";
 import greenBackIcon from "../../assets/green_back_icon.svg";
 import avatar from "../../assets/avatar_icon.svg";
 
-export function MobileModal({
+export default function MobileModal({
   isMobileModalOpened,
   handleOpenUserModal,
   onClose,
@@ -36,7 +36,7 @@ export function MobileModal({
             src={headerPic || avatar}
             alt="Avatar"
           />
-          <p className="header__profile__text">{currentUser}</p>
+          <p className="header__profile__text">{currentUser?.name}</p>
         </button>
       </div>
     </div>

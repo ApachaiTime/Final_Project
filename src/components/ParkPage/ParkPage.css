@@ -1,23 +1,13 @@
-.park-page {
+.park-page__img__container {
   position: relative;
-  display: flex;
-  background-color: #102210;
+  height: 90vh;
+  width: 100vw;
 }
 
 .park-page__img {
-  max-height: 110vh;
-  width: 74vw;
-  border-radius: 0 50px 50px 0;
-  box-sizing: border-box;
-}
-
-.park-page__back-btn {
-  cursor: pointer;
-  background: transparent;
-  border-style: none;
-  position: absolute;
-  left: 20px;
-  top: 15px;
+  object-fit: cover;
+  height: 92.3vh;
+  width: 100vw;
 }
 
 .park-page__distance {
@@ -33,7 +23,12 @@
 }
 
 .park-page__info {
-  padding: 30px;
+  position: absolute;
+  height: 91vh;
+  right: 0;
+  background-color: #050505bd;
+  z-index: 1;
+  padding: 14px 22px 0;
   display: flex;
   width: 20vw;
   flex-direction: column;
@@ -74,23 +69,25 @@
 }
 
 .park-page__activities {
+  position: absolute;
+  z-index: 9;
   font-family: "Lora", serif;
   font-weight: 400;
   font-size: 0.9em;
   margin-top: 12px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   max-width: 400px;
   display: flex;
   gap: 8px;
-  bottom: 5px;
-  right: 45px;
+  left: 32px;
 }
 
 .park-page__activities p {
-  background: rgba(150, 150, 150, 0.24);
+  background: #05050585;
   padding: 8px 12px;
   border-radius: 8px;
   margin: 0;
+  height: fit-content;
 }
 
 .park-page__description {
@@ -104,21 +101,17 @@
 .park-page__list {
   list-style: none;
   padding: 0;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   display: flex;
   gap: 12px;
   margin-top: 15px;
 }
 
 .park-page__item {
-  color: #13ec13;
+  color: #fffefead;
   display: flex;
-  align-items: center;
   gap: 10px;
-  background-color: #121f13;
-  padding: 20px;
-  border-radius: 20px;
-  border: 1px solid #585858;
+  align-items: center;
 }
 
 .park-page__item__text {
@@ -128,9 +121,6 @@
 }
 
 .park-page__item__img {
-  width: 20px;
-  height: 20px;
-  margin-left: 5px;
 }
 
 .park-page-btn {
@@ -169,7 +159,6 @@
   }
 
   .park-page__item {
-width: 230px
+    width: 230px;
   }
-
 }

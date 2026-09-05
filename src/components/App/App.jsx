@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { LandscapeImageContext } from "../../contexts/LandScapeImageContext.js";
-import { getAvatar, getUserName, getUserZip } from "../../utils/userData.js";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
+import { getToken, removeToken } from "../../utils/token.js";
+import { getCurrentUser, updateUser } from "../../utils/auth.js";
 import {
   getParkData,
   getNearbyParks,
@@ -12,14 +14,21 @@ import Main from "../Main/Main.jsx";
 import Header from "../Header/Header.jsx";
 import ParkPage from "../ParkPage/ParkPage.jsx";
 import UserModal from "../UserModal/UserModal.jsx";
-import { MobileModal } from "../MobileModal/MobileModal.jsx";
+import MobileModal from "../MobileModal/MobileModal.jsx";
+import Signin from "../Signin/Signin.jsx";
+import Signup from "../Signup/Signup.jsx";
 import getLatLongFromZip from "../../utils/geocode.js";
+
 function App() {
   const [parks, setParks] = useState([]);
   const [closest, setClosest] = useState([]);
   const [featured, setFeatured] = useState([]);
   const [activeModal, setActiveModal] = useState("");
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState({
+    name: null,
+    zipCode: null,
+    avatar: null,
+  });
   const [profilePicUrl, setProfilePicUrl] = useState(null);
   const [headerPic, setHeaderPic] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -27,13 +36,26 @@ function App() {
   const [isMobileMenuOpened, setisMobileMenuOpened] = useState(false);
   const [getError, setError] = useState("");
 
+  const navigate = useNavigate();
   useEffect(() => {
-    const userName = getUserName();
-    const userZip = getUserZip();
+    if (getToken() === null) {
+      navigate("/signin");
+    } else {
+      navigate("/");
+      getCurrentUser()
+        .then((data) => {
+          setCurrentUser(data);
+          setHeaderPic(data.avatar);
+          setProfilePicUrl(data.avatar);
+        })
+        .catch((err) => console.error(err));
+    }
+  }, []);
 
+  useEffect(() => {
     // If user has BOTH values, fetch for their location
-    if (userZip !== null) {
-      const userCoords = getLatLongFromZip(userZip);
+    if (currentUser?.zipCode !== null) {
+      const userCoords = getLatLongFromZip(currentUser.zipCode);
       userCoords
         .then((coords) => {
           if (!coords) {
@@ -44,7 +66,6 @@ function App() {
           return getParkData(coords);
         })
         .then((allParks) => {
-          setCurrentUser(userName || "John Doe");
           setParks(allParks);
           setClosest(getNearbyParks(allParks));
           setFeatured(getFeaturedParks(allParks));
@@ -70,7 +91,7 @@ function App() {
           setLoading(false);
         });
     }
-  }, []);
+  }, [currentUser?.zipCode]);
   function getLandscapeImage(park) {
     const imgs = park?.images;
     if (!Array.isArray(imgs) || imgs.length === 0) return null;
@@ -136,7 +157,14 @@ function App() {
 
   function handleCloseModal() {
     setActiveModal("");
-    setProfilePicUrl(getAvatar());
+    setProfilePicUrl(headerPic);
+  }
+
+  function handleSignOut() {
+    removeToken();
+    setCurrentUser({ name: null, zipCode: null });
+    handleCloseModal();
+    navigate("/signin");
   }
 
   const toggleMobileMenu = () => {
@@ -160,7 +188,7 @@ function App() {
   function handleSubmit(values) {
     setError("");
 
-    const cleanedZip = values.zip.trim();
+    const cleanedZip = values.zipCode?.trim();
     if (!/^\d{5}(-\d{4})?$/.test(cleanedZip)) {
       setError("Enter a valid US ZIP code");
       return;
@@ -168,8 +196,6 @@ function App() {
     const userCoords = getLatLongFromZip(cleanedZip);
     return userCoords
       .then((coords) => {
-        localStorage.setItem("UserName", values.username);
-        localStorage.setItem("UserZip", cleanedZip);
         return coords;
       })
       .then((coords) => {
@@ -179,73 +205,94 @@ function App() {
         }
         setLoading(true);
 
-        return getParkData(coords);
-      })
-      .then((allParks) => {
-        setParks(allParks);
-        setClosest(getNearbyParks(allParks));
-        setFeatured(getFeaturedParks(allParks));
-        handleCloseModal();
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError("Something went wrong loading parks.");
-        console.error(error);
-        console.error("Error messeage for user", getError);
-        setLoading(false);
+        const userUpdate = selectedFile
+          ? (() => {
+              const formData = new FormData();
+              formData.append("avatar", selectedFile);
+              formData.append("name", values.name);
+              formData.append("zipCode", cleanedZip);
+              return updateUser(formData);
+            })()
+          : updateUser(
+              JSON.stringify({ name: values.name, zipCode: cleanedZip }),
+            );
+
+        return userUpdate
+          .then((data) => {
+            setCurrentUser(data);
+            setHeaderPic(data.avatar);
+            getLatLongFromZip(cleanedZip);
+            return getParkData(coords);
+          })
+
+          .then((allParks) => {
+            setLoading(false);
+            handleCloseModal();
+            setParks(allParks);
+            setClosest(getNearbyParks(allParks));
+            setFeatured(getFeaturedParks(allParks));
+          })
+          .catch((err) => {
+            setError("Something went wrong updating your profile.");
+            console.error(err);
+            setLoading(false);
+          });
       });
   }
 
   return (
-    <LandscapeImageContext.Provider value={getLandscapeImage}>
-      <div className="app">
-        <Header
-          toggleMobileMenu={toggleMobileMenu}
-          handleOpenUserModal={handleOpenUserModal}
-          parks={parks}
-          currentUser={currentUser}
-          getLandscapeImage={getLandscapeImage}
-          setHeaderPic={setHeaderPic}
-          headerPic={headerPic}
-        />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div className="app__content">
-                <Main featured={featured} closest={closest} parks={parks} />
-              </div>
-            }
+    <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+      <LandscapeImageContext.Provider value={getLandscapeImage}>
+        <div className="app">
+          <Header
+            toggleMobileMenu={toggleMobileMenu}
+            handleOpenUserModal={handleOpenUserModal}
+            parks={parks}
+            getLandscapeImage={getLandscapeImage}
+            setHeaderPic={setHeaderPic}
+            headerPic={headerPic}
           />
-          <Route
-            path="/park/:parkCode"
-            element={<ParkPage parks={parks} />}
-          ></Route>
-        </Routes>
-      </div>
-      <UserModal
-        onClose={handleCloseModal}
-        isOpened={activeModal === "user"}
-        name="user"
-        handleSubmit={handleSubmit}
-        setCurrentUser={setCurrentUser}
-        buttonText={loading ? "Updating..." : "Update Profile"}
-        profilePicUrl={profilePicUrl}
-        setProfilePicUrl={setProfilePicUrl}
-        selectedFile={selectedFile}
-        setSelectedFile={setSelectedFile}
-        setHeaderPic={setHeaderPic}
-      />
-      <MobileModal
-        isMobileModalOpened={isMobileMenuOpened}
-        handleOpenUserModal={handleOpenUserModal}
-        onClose={toggleMobileMenu}
-        parks={parks}
-        getLandscapeImage={getLandscapeImage}
-        headerPic={headerPic}
-        currentUser={currentUser}
-      />
-    </LandscapeImageContext.Provider>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <div className="app__content">
+                  <Main featured={featured} closest={closest} parks={parks} />
+                </div>
+              }
+            />
+            <Route
+              path="/park/:parkCode"
+              element={<ParkPage parks={parks} />}
+            ></Route>
+            <Route path="/signup" element={<Signup />}></Route>
+            <Route path="/signin" element={<Signin />}></Route>
+          </Routes>
+        </div>
+        <UserModal
+          onClose={handleCloseModal}
+          isOpened={activeModal === "user"}
+          name="user"
+          handleSubmit={handleSubmit}
+          buttonText={loading ? "Updating..." : "Update Profile"}
+          profilePicUrl={profilePicUrl}
+          setProfilePicUrl={setProfilePicUrl}
+          selectedFile={selectedFile}
+          setSelectedFile={setSelectedFile}
+          setHeaderPic={setHeaderPic}
+          handleSignOut={handleSignOut}
+        />
+        <MobileModal
+          isMobileModalOpened={isMobileMenuOpened}
+          handleOpenUserModal={handleOpenUserModal}
+          onClose={toggleMobileMenu}
+          parks={parks}
+          getLandscapeImage={getLandscapeImage}
+          headerPic={headerPic}
+          currentUser={currentUser}
+        />
+      </LandscapeImageContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 
