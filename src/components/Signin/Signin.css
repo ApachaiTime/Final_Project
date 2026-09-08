@@ -1,0 +1,40 @@
+.signin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.signin__form {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.signin__label {
+  font-weight: bold;
+}
+
+.signin__input {
+  padding: 5px;
+  border-radius: 5px;
+  width: 230px;
+  border-style: none;
+}
+
+.signin__input:focus {
+  outline: 2px solid #13ec13;
+}
+
+.signin-btn {
+  margin: 20px 0 5px;
+  padding: 8px;
+}
+
+.signin-btn__signup {
+  padding: 5px;
+}
+
+.error {
+  color: rgb(255, 97, 97);
+}

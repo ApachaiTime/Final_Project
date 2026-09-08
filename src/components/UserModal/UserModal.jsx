@@ -1,53 +1,46 @@
 import "./UserModal.css";
-import { getUserName, getUserZip, getAvatar } from "../../utils/userData.js";
 import { useForm } from "../../hooks/useForm";
 import avatarIcon from "../../assets/avatar_icon.svg";
 import greenBackIcon from "../../assets/green_back_icon.svg";
-import { useEffect } from "react";
+
+import { useContext, useEffect } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 export default function UserModal({
   onClose,
   isOpened,
   name,
   handleSubmit,
-  setCurrentUser,
   buttonText,
   profilePicUrl,
   setProfilePicUrl,
   selectedFile,
   setSelectedFile,
   setHeaderPic,
+  handleSignOut,
 }) {
+  const { setCurrentUser, currentUser } = useContext(CurrentUserContext);
   const { values, handleChange, setValues } = useForm({
-    username: "",
-    zip: "",
+    name: currentUser?.name || "",
+    zipCode: currentUser?.zipCode || "",
+    avatar: currentUser?.avatar || "",
   });
+
   useEffect(() => {
-    const userName = getUserName();
-    const userZip = getUserZip();
-    const userAvatar = getAvatar();
-    let defaultValues = {
-      username: userName || "John Doe",
-      zip: userZip || "75287",
-    };
-
-    setValues(defaultValues);
-    setCurrentUser(userName || "John Doe");
-
-    if (userAvatar !== null) {
-      setProfilePicUrl(userAvatar);
+    if (currentUser) {
+      console.log("currentUser", currentUser);
+      setValues({
+        name: currentUser?.name || "",
+        zipCode: currentUser?.zipCode || "",
+        avatar: currentUser?.avatar || "",
+      });
     }
-  }, []);
+  }, [currentUser, setValues]);
+  // work on full functionality of updating avatar and user info
+
   const onFormSubmit = (e) => {
     e.preventDefault();
-    if (selectedFile) {
-      const savedUrl = URL.createObjectURL(selectedFile);
-      localStorage.setItem("UserProfileAvatar", savedUrl);
-      setHeaderPic(savedUrl);
-    }
-    setCurrentUser(values.username);
     handleSubmit(values);
   };
-
   function handleFileChange(e) {
     const file = e.target.files[0];
     if (file) {
@@ -81,22 +74,23 @@ export default function UserModal({
           <p className="modal__text">
             This is a placeholder for the user profile information.
           </p>
-          <form action="submit" className="modal__form" onSubmit={onFormSubmit}>
-            <label htmlFor="username" className="modal__label">
-              Username:
+          <form className="modal__form" onSubmit={onFormSubmit}>
+            <label htmlFor="name" className="modal__label">
+              User name:
             </label>
             <input
               required
               minLength={3}
               type="text"
-              id="username"
-              name="username"
+              id="name"
+              name="name"
               className="modal__input"
-              placeholder="Username"
+              placeholder="Name"
               onChange={handleChange}
-              value={values.username}
+              value={values.name}
             />
-            <label htmlFor="zip" className="modal__label">
+
+            <label htmlFor="zipCode" className="modal__label">
               ZIP Code:
             </label>
             <input
@@ -106,18 +100,24 @@ export default function UserModal({
               minLength={5}
               maxLength={5}
               type="text"
-              id="zip"
-              name="zip"
+              id="zipCode"
+              name="zipCode"
               className="modal__input"
               placeholder="Zip code"
               onChange={handleChange}
-              value={values.zip}
+              value={values.zipCode}
             />
-            <p className="modal__input__note"></p>
             <button type="submit" className="modal__submit-btn">
               {buttonText}
             </button>
           </form>
+          <button
+            type="button"
+            className="modal__signout-btn"
+            onClick={handleSignOut}
+          >
+            Sign Out
+          </button>
         </div>
       </div>
     </div>

@@ -1,27 +1,33 @@
 import "../Header/Header.css";
 import { Link, useLocation } from "react-router-dom";
-import { getAvatar } from "../../utils/userData";
 import mobileIcon from "../../assets/ham_icon.svg";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar_icon.svg";
 import { ParkSearch } from "../ParkSearch/ParkSearch";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
+// Add logged in users details if token is saved
 export default function Header({
   handleOpenUserModal,
-  currentUser,
   parks,
   getLandscapeImage,
   setHeaderPic,
   headerPic,
   toggleMobileMenu,
 }) {
-  useEffect(() => {
-    if (getAvatar() !== null) {
-      setHeaderPic(getAvatar());
-    }
-  }, []);
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  useEffect(() => {}, []);
   const location = useLocation();
-  return (
+  return currentUser?.name === null ? (
+    <>
+      <header className="header">
+        <button className="header__logo">
+          <img src={logo} alt="Logo" />
+          <p className="header__logo__text"> National Park Explorer</p>
+        </button>
+      </header>
+    </>
+  ) : (
     <header className="header">
       <div className="header__left">
         <Link to="/">
@@ -38,8 +44,13 @@ export default function Header({
           )}
         </Link>
       </div>
+
       <button onClick={() => toggleMobileMenu()} className="header__mobile-btn">
-        <img className="header__mobile-img" src={mobileIcon} alt="Header button" />
+        <img
+          className="header__mobile-img"
+          src={mobileIcon}
+          alt="Header button"
+        />
       </button>
       <div className="header__right">
         <ParkSearch parks={parks} getLandscapeImage={getLandscapeImage} />
@@ -53,7 +64,7 @@ export default function Header({
             src={headerPic || avatar}
             alt="Avatar"
           />
-          <p className="header__profile__text">{currentUser}</p>
+          <p className="header__profile__text">{currentUser?.name}</p>
         </button>
       </div>
     </header>

@@ -11,7 +11,7 @@ export default function ParkPage({ parks }) {
   const navigate = useNavigate();
   const parkActivities =
     park?.activities
-      ?.slice(0, 10)
+      ?.slice(0, 5)
       .map((activity, index) => <p key={index}>{activity.name}</p>) || [];
 
   const today = new Date()
@@ -31,71 +31,67 @@ export default function ParkPage({ parks }) {
   }
   return (
     <section className="park-page">
-      <button className="park-page__back-btn" onClick={() => navigate(-1)}>
-        <img src={backBtn} alt="Back button" />
-      </button>
-      <img
-        src={park?.images?.[0]?.url ?? null}
-        alt={park?.fullName ?? "Park Image"}
-        className="park-page__img"
-      />
+    
+        <div className="park-page__info">
+          <p className="park-page__distance">
+            {Math.round(park?.distanceMiles)} Miles
+          </p>
+          <span className="park-page__span">
+            <div className="park-page__indicator"></div>
 
-      <div className="park-page__info">
-        <p className="park-page__distance">
-          {Math.round(park?.distanceMiles)} Miles
-        </p>
-        <span className="park-page__span">
-          <div className="park-page__indicator"></div>
+            <h1 className="park-page__title">
+              {park ? park?.fullName : "Data is loading..."}
+            </h1>
+          </span>
 
-          <h1 className="park-page__title">
-            {park ? park?.fullName : "Data is loading..."}
-          </h1>
-        </span>
-        <div className="park-page__address__block">
-          <img
-            src={locationIcon}
-            alt="Location icon"
-            className="park-page__loc__img"
-          />
-          <div className="park-page__address">
-            {park?.address?.line1} {park?.address?.city},{" "}
-            {park?.address?.stateCode}, {park?.address?.postalCode}
+          <div className="park-page__address__block">
+            <img
+              src={locationIcon}
+              alt="Location icon"
+              className="park-page__loc__img"
+            />
+            <div className="park-page__address">
+              {park?.address?.line1} {park?.address?.city},{" "}
+              {park?.address?.stateCode}, {park?.address?.postalCode}
+            </div>
           </div>
+          <ul className="park-page__list">
+            <li className="park-page__item">
+              <img
+                src={phoneIcon}
+                alt="Phone Icon"
+                className="park-page__item__img"
+              />
+              <p className="park-page__item__text">
+                {park ? park?.contact : "Data is loading..."}
+              </p>
+            </li>
+
+            <li className="park-page__item">
+              <img
+                src={hoursIcon}
+                alt="Hours Icon"
+                className="park-page__item__img"
+              />
+              <p className="park-page__item__text">
+                {park ? parkOpenStatusAndHours() : "Data is loading..."}
+              </p>
+            </li>
+          </ul>
+
+          <p className="park-page__description">{park?.description}</p>
+
+          <button className="park-page-btn" onClick={() => handleButtonClick()}>
+            Plan your trip &#x2192;
+          </button>
         </div>
         <div className="park-page__activities"> {parkActivities}</div>
-        <p className="park-page__description">{park?.description}</p>
-        <span className="park-page__span">
-          <div className="park-page__indicator"></div>
-          <h2 className="park-page__title">Contact & Hours</h2>
-        </span>
-
-        <ul className="park-page__list">
-          <li className="park-page__item">
-            <img
-              src={phoneIcon}
-              alt="Phone Icon"
-              className="park-page__item__img"
-            />
-            <p className="park-page__item__text">
-              {park ? park?.contact : "Data is loading..."}
-            </p>
-          </li>
-
-          <li className="park-page__item">
-            <img
-              src={hoursIcon}
-              alt="Hours Icon"
-              className="park-page__item__img"
-            />
-            <p className="park-page__item__text">
-              {park ? parkOpenStatusAndHours() : "Data is loading..."}
-            </p>
-          </li>
-        </ul>
-        <button className="park-page-btn" onClick={() => handleButtonClick()}>
-          Plan your trip &#x2192;
-        </button>
-      </div>
+        <img
+          src={park?.images?.[0]?.url ?? null}
+          alt={park?.fullName ?? "Park Image"}
+          className="park-page__img"
+        />
+   
     </section>
   );
 }

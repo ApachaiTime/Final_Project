@@ -145,6 +145,25 @@
   background-color: #1ed41e;
 }
 
+.modal__signout-btn {
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-size: 0.9em;
+  cursor: pointer;
+  width: 220px;
+  background: transparent;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #13ec13;
+  padding: 20px 20px;
+  border-radius: 10px;
+  color: #13ec13;
+}
+
+.modal__signout-btn:hover {
+  background-color: rgba(19, 236, 19, 0.15);
+}
+
 @media screen and (min-width: 850px) {
   .modal__container {
     position: relative;
