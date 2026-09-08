@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { LandscapeImageContext } from "../../contexts/LandScapeImageContext.js";
+import { LandscapeImageContext } from "../../contexts/LandscapeImageContext.js";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 import { getToken, removeToken } from "../../utils/token.js";
 import { getCurrentUser, updateUser } from "../../utils/auth.js";
