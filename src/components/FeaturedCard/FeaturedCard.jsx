@@ -1,7 +1,7 @@
 import "./FeaturedCard.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { LandscapeImageContext } from "../../contexts/LandScapeImageContext.js";
+import { LandscapeImageContext } from "../../contexts/LandscapeImageContext.js";
 import locationIcon from "../../assets/location_icon.svg";
 function FeaturedCard({ park }) {
   const getLandscapeImage = useContext(LandscapeImageContext);
