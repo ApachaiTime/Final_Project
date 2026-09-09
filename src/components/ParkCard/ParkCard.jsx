@@ -1,7 +1,7 @@
 import "./ParkCard.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { LandscapeImageContext } from "../../contexts/LandScapeImageContext.js";
+import { LandscapeImageContext } from "../../contexts/LandscapeImageContext.js";
 
 function ParkCard({ park }) {
   const getLandscapeImage = useContext(LandscapeImageContext);
