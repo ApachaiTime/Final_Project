@@ -48,7 +48,12 @@ function App() {
           setHeaderPic(data.avatar);
           setProfilePicUrl(data.avatar);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          console.error(err);
+          removeToken();
+          setCurrentUser({ name: null, zipCode: null, avatar: null });
+          navigate("/signin");
+        });
     }
   }, []);
 
