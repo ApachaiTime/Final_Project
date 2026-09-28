@@ -1,3 +1,14 @@
+.park-page {
+  position: relative;
+}
+
+.saved-badge_park-page {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+}
+
 .park-page__img__container {
   position: relative;
   height: 90vh;
@@ -33,6 +44,7 @@
   width: 20vw;
   flex-direction: column;
   color: white;
+  overflow-y: auto;
 }
 
 .park-page__span {
@@ -141,17 +153,42 @@
 
 @media screen and (max-width: 1400px) {
   .park-page {
+    display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0px;
   }
+
   .park-page__img {
+    position: static;
+    order: 1;
     width: 100%;
+    height: 45vh;
     border-radius: 0;
   }
+
+  .park-page__activities {
+    position: static;
+    order: 2;
+    width: 100%;
+    max-width: 100%;
+    left: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 12px 0 0;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
   .park-page__info {
-    padding: 10px;
-    width: 89vw;
+    position: static;
+    order: 3;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    padding: 16px;
+    box-sizing: border-box;
   }
 
   .park-page__list {
@@ -160,5 +197,33 @@
 
   .park-page__item {
     width: 230px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .park-page__img {
+    height: 32vh;
+  }
+
+  .park-page__title {
+    font-size: 1.3em;
+  }
+
+  .park-page__item {
+    width: 100%;
+  }
+
+  .park-page__activities {
+    gap: 6px;
+  }
+
+  .park-page__activities p {
+    padding: 6px 10px;
+    font-size: 0.85em;
+  }
+
+  .park-page-btn {
+    width: 100%;
+    padding: 14px;
   }
 }

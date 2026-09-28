@@ -1,0 +1,25 @@
+.saved-badge {
+  background-color: #050505bd;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+}
+
+.saved-badge:hover {
+  background-color: #050505;
+}
+
+.saved-badge_active {
+  color: #13ec13;
+}
+
+.saved-badge__icon {
+  width: 18px;
+  height: 18px;
+}

@@ -1,14 +1,14 @@
 import "./ParkPage.css";
-import backBtn from "../../assets/back_icon.svg";
 import locationIcon from "../../assets/location_icon.svg";
 import phoneIcon from "../../assets/phone_icon.svg";
 import hoursIcon from "../../assets/hours_icon.svg";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Comments from "../Comments/Comments.jsx";
+import SavedBadge from "../SavedBadge/SavedBadge.jsx";
 
 export default function ParkPage({ parks }) {
   const { parkCode } = useParams();
   const park = parks.find((p) => p.parkCode === parkCode);
-  const navigate = useNavigate();
   const parkActivities =
     park?.activities
       ?.slice(0, 5)
@@ -21,7 +21,7 @@ export default function ParkPage({ parks }) {
     .toLocaleLowerCase();
   function parkOpenStatusAndHours() {
     const hoursForToday = park?.operatingHours?.[today];
-    return `${hoursForToday}` ?? "No hours available";
+    return hoursForToday ?? "No hours available";
   }
 
   function handleButtonClick() {
@@ -31,7 +31,12 @@ export default function ParkPage({ parks }) {
   }
   return (
     <section className="park-page">
-    
+        {park && (
+          <SavedBadge
+            parkCode={parkCode}
+            className="saved-badge_park-page"
+          />
+        )}
         <div className="park-page__info">
           <p className="park-page__distance">
             {Math.round(park?.distanceMiles)} Miles
@@ -84,6 +89,8 @@ export default function ParkPage({ parks }) {
           <button className="park-page-btn" onClick={() => handleButtonClick()}>
             Plan your trip &#x2192;
           </button>
+
+          {park && <Comments parkCode={parkCode} />}
         </div>
         <div className="park-page__activities"> {parkActivities}</div>
         <img
@@ -91,7 +98,6 @@ export default function ParkPage({ parks }) {
           alt={park?.fullName ?? "Park Image"}
           className="park-page__img"
         />
-   
     </section>
   );
 }

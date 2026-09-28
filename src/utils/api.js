@@ -2,20 +2,20 @@ import { endPointCall } from "./auth.js";
 const baseUrl = import.meta.env.VITE_API_URL;
 
 const getComments = () => {
-  return endPointCall("park/comments", "GET", null, true);
+  return endPointCall("/park/comments", "GET", null, true);
 };
 
-const addComment = ({ author, text, parkCode }) => {
+const addComment = ({ authorName, userId, text, parkCode }) => {
   return endPointCall(
-    "park/comments",
+    "/park/comments",
     "POST",
-    JSON.stringify({ author, text, parkCode }),
+    JSON.stringify({ authorName, userId, text, parkCode }),
     true,
   );
 };
 
 const deleteComment = (id) => {
-  return endPointCall(`park/comments/${id}`, "DELETE", null, true);
+  return endPointCall(`/park/comments/${id}`, "DELETE", null, true);
 };
 
 export { getComments, addComment, deleteComment, baseUrl };
