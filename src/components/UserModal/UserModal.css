@@ -22,7 +22,7 @@
 .modal__container {
   position: relative;
   left: 168px;
-  top: -310px;
+  top: -380px;
   z-index: 3;
 }
 
@@ -92,6 +92,9 @@
 .modal__profile__img {
   width: 128px;
   height: 128px;
+  min-width: 128px;
+  min-height: 128px;
+  flex-shrink: 0;
   border-radius: 50%;
   object-fit: cover;
   border: 2px dashed #13ec13;
@@ -143,6 +146,27 @@
 
 .modal__submit-btn:hover {
   background-color: #1ed41e;
+}
+
+.modal__view-saved-btn {
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-size: 0.8em;
+  cursor: pointer;
+  width: fit-content;
+  box-sizing: border-box;
+  background: transparent;
+  border-style: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  color: #13ec13;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+}
+
+.modal__view-saved-btn:hover {
+  background-color: rgba(19, 236, 19, 0.15);
 }
 
 .modal__signout-btn {

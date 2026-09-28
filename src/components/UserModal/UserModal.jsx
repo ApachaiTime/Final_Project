@@ -2,6 +2,7 @@ import "./UserModal.css";
 import { useForm } from "../../hooks/useForm";
 import avatarIcon from "../../assets/avatar_icon.svg";
 import greenBackIcon from "../../assets/green_back_icon.svg";
+import { Link } from "react-router-dom";
 
 import { useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
@@ -111,6 +112,15 @@ export default function UserModal({
               {buttonText}
             </button>
           </form>
+
+          <Link
+            to="/saved"
+            onClick={onClose}
+            className="modal__view-saved-btn"
+          >
+            View Saved Parks
+          </Link>
+
           <button
             type="button"
             className="modal__signout-btn"

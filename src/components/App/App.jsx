@@ -17,6 +17,7 @@ import UserModal from "../UserModal/UserModal.jsx";
 import MobileModal from "../MobileModal/MobileModal.jsx";
 import Signin from "../Signin/Signin.jsx";
 import Signup from "../Signup/Signup.jsx";
+import SavedParks from "../SavedParks/SavedParks.jsx";
 import getLatLongFromZip from "../../utils/geocode.js";
 
 function App() {
@@ -165,6 +166,19 @@ function App() {
     setProfilePicUrl(headerPic);
   }
 
+  function toggleSavedPark(parkCode) {
+    const savedParks = currentUser?.savedParks ?? [];
+    const updatedSavedParks = savedParks.includes(parkCode)
+      ? savedParks.filter((code) => code !== parkCode)
+      : [...savedParks, parkCode];
+
+    updateUser(JSON.stringify({ savedParks: updatedSavedParks }))
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => console.error(err));
+  }
+
   function handleSignOut() {
     removeToken();
     setCurrentUser({ name: null, zipCode: null });
@@ -246,7 +260,9 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+    <CurrentUserContext.Provider
+      value={{ currentUser, setCurrentUser, toggleSavedPark }}
+    >
       <LandscapeImageContext.Provider value={getLandscapeImage}>
         <div className="app">
           <Header
@@ -270,6 +286,14 @@ function App() {
               path="/park/:parkCode"
               element={<ParkPage parks={parks} />}
             ></Route>
+            <Route
+              path="/saved"
+              element={
+                <div className="app__content">
+                  <SavedParks parks={parks} />
+                </div>
+              }
+            />
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/signin" element={<Signin />}></Route>
           </Routes>
