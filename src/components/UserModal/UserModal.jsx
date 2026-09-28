@@ -118,7 +118,7 @@ export default function UserModal({
             onClick={onClose}
             className="modal__view-saved-btn"
           >
-            View Saved Parks
+            View Saved Parks ({currentUser?.savedParks?.length ?? 0})
           </Link>
 
           <button

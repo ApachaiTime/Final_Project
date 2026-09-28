@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { LandscapeImageContext } from "../../contexts/LandscapeImageContext.js";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
@@ -18,6 +18,7 @@ import MobileModal from "../MobileModal/MobileModal.jsx";
 import Signin from "../Signin/Signin.jsx";
 import Signup from "../Signup/Signup.jsx";
 import SavedParks from "../SavedParks/SavedParks.jsx";
+import Toast from "../Toast/Toast.jsx";
 import getLatLongFromZip from "../../utils/geocode.js";
 
 function App() {
@@ -36,8 +37,16 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [isMobileMenuOpened, setisMobileMenuOpened] = useState(false);
   const [getError, setError] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
+  const toastTimeoutRef = useRef(null);
 
   const navigate = useNavigate();
+
+  function showToast(message) {
+    setToastMessage(message);
+    clearTimeout(toastTimeoutRef.current);
+    toastTimeoutRef.current = setTimeout(() => setToastMessage(""), 2500);
+  }
   useEffect(() => {
     if (getToken() === null) {
       navigate("/signin");
@@ -168,13 +177,22 @@ function App() {
 
   function toggleSavedPark(parkCode) {
     const savedParks = currentUser?.savedParks ?? [];
-    const updatedSavedParks = savedParks.includes(parkCode)
+    const wasSaved = savedParks.includes(parkCode);
+    const updatedSavedParks = wasSaved
       ? savedParks.filter((code) => code !== parkCode)
       : [...savedParks, parkCode];
 
     updateUser(JSON.stringify({ savedParks: updatedSavedParks }))
       .then((data) => {
         setCurrentUser(data);
+        const parkName =
+          parks.find((park) => park.parkCode === parkCode)?.fullName ??
+          "Park";
+        showToast(
+          wasSaved
+            ? `${parkName} removed from Saved Parks`
+            : `${parkName} added to Saved Parks`,
+        );
       })
       .catch((err) => console.error(err));
   }
@@ -320,6 +338,7 @@ function App() {
           headerPic={headerPic}
           currentUser={currentUser}
         />
+        <Toast message={toastMessage} />
       </LandscapeImageContext.Provider>
     </CurrentUserContext.Provider>
   );
