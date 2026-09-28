@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 import { getComments, addComment, deleteComment } from "../../utils/api.js";
 import defaultAvatar from "../../assets/avatar_icon.svg";
+import ConfirmModal from "../ConfirmModal/ConfirmModal.jsx";
 
 export default function Comments({ parkCode }) {
   const { currentUser } = useContext(CurrentUserContext);
@@ -16,6 +17,7 @@ export default function Comments({ parkCode }) {
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState("");
   const [savingEdit, setSavingEdit] = useState(false);
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
 
   const loading = loadedComments.parkCode !== parkCode;
   const comments = loadedComments.comments;
@@ -196,7 +198,7 @@ export default function Comments({ parkCode }) {
                       <button
                         type="button"
                         className="comments__delete"
-                        onClick={() => handleDelete(id)}
+                        onClick={() => setConfirmDeleteId(id)}
                       >
                         Delete
                       </button>
@@ -238,6 +240,18 @@ export default function Comments({ parkCode }) {
           })}
         </ul>
       )}
+
+      <ConfirmModal
+        isOpen={confirmDeleteId !== null}
+        message="Are you sure you want to delete this comment?"
+        confirmText="Delete"
+        cancelText="Cancel"
+        onCancel={() => setConfirmDeleteId(null)}
+        onConfirm={() => {
+          handleDelete(confirmDeleteId);
+          setConfirmDeleteId(null);
+        }}
+      />
     </section>
   );
 }
