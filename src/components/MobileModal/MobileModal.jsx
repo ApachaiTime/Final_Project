@@ -1,4 +1,5 @@
 import "./MobileModal.css";
+import { Link } from "react-router-dom";
 import { ParkSearch } from "../ParkSearch/ParkSearch";
 import greenBackIcon from "../../assets/green_back_icon.svg";
 import avatar from "../../assets/avatar_icon.svg";
@@ -12,6 +13,7 @@ export default function MobileModal({
   getLandscapeImage,
   headerPic,
   currentUser,
+  handleSignOut,
 }) {
   return (
     <div
@@ -19,7 +21,25 @@ export default function MobileModal({
     >
       <div className="mobile__content">
         <button className="mobile__back-btn" onClick={onClose}>
-          <img className="mobile__back-img" src={greenBackIcon} alt="Back button" />
+          <img
+            className="mobile__back-img"
+            src={greenBackIcon}
+            alt="Back button"
+          />
+        </button>
+          <Link
+            to="/saved"
+            onClick={onClose}
+            className="modal__view-saved-btn"
+          >
+            View Saved Parks ({currentUser?.savedParks?.length ?? 0})
+          </Link>
+        <button
+          type="button"
+          className="mobile__signout-btn"
+          onClick={handleSignOut}
+        >
+          Sign Out
         </button>
         <ParkSearch
           parks={parks}

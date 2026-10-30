@@ -328,6 +328,7 @@ function App() {
           setSelectedFile={setSelectedFile}
           setHeaderPic={setHeaderPic}
           handleSignOut={handleSignOut}
+          isMobileModalOpened={isMobileMenuOpened}
         />
         <MobileModal
           isMobileModalOpened={isMobileMenuOpened}
@@ -337,6 +338,7 @@ function App() {
           getLandscapeImage={getLandscapeImage}
           headerPic={headerPic}
           currentUser={currentUser}
+          handleSignOut={handleSignOut}
         />
         <Toast message={toastMessage} />
       </LandscapeImageContext.Provider>
