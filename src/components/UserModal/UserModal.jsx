@@ -18,6 +18,7 @@ export default function UserModal({
   setSelectedFile,
   setHeaderPic,
   handleSignOut,
+  isMobileModalOpened,
 }) {
   const { setCurrentUser, currentUser } = useContext(CurrentUserContext);
   const { values, handleChange, setValues } = useForm({
@@ -52,7 +53,9 @@ export default function UserModal({
   }
   return (
     <div
-      className={`modal modal_type_${name} ${isOpened ? "modal__opened" : ""}`}
+      className={`modal modal_type_${name} ${isOpened ? "modal__opened" : ""}${
+        isMobileModalOpened ? " modal_mobile" : ""
+      }`}
     >
       <div className="modal__container">
         <div className="modal__content">
@@ -108,26 +111,35 @@ export default function UserModal({
               onChange={handleChange}
               value={values.zipCode}
             />
-            <button type="submit" className="modal__submit-btn">
+            <button
+              type="submit"
+              className={`modal__submit-btn${
+                isMobileModalOpened ? " modal__submit-btn_mobile" : ""
+              }`}
+            >
               {buttonText}
             </button>
           </form>
 
-          <Link
-            to="/saved"
-            onClick={onClose}
-            className="modal__view-saved-btn"
-          >
-            View Saved Parks ({currentUser?.savedParks?.length ?? 0})
-          </Link>
+          {!isMobileModalOpened && (
+            <>
+              <Link
+                to="/saved"
+                onClick={onClose}
+                className="modal__view-saved-btn"
+              >
+                View Saved Parks ({currentUser?.savedParks?.length ?? 0})
+              </Link>
 
-          <button
-            type="button"
-            className="modal__signout-btn"
-            onClick={handleSignOut}
-          >
-            Sign Out
-          </button>
+              <button
+                type="button"
+                className="modal__signout-btn"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

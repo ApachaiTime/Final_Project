@@ -134,12 +134,11 @@ margin: 12px 12px 12px 0;
 
   .header__profile {
     padding-left: 8px;
-
     width: 200px;
     border-style: dashed;
     border-width: 0 0 2px 0;
     border-color: #13ec13;
-    padding-bottom: 18px;
+    padding-bottom: 8px;
   }
 
   .header__profile:hover {

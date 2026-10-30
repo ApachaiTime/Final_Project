@@ -91,7 +91,6 @@
   max-width: 400px;
   display: flex;
   gap: 8px;
-  left: 32px;
 }
 
 .park-page__activities p {
@@ -169,10 +168,10 @@
 
   .park-page__activities {
     position: static;
+    z-index: -1;
     order: 2;
     width: 100%;
     max-width: 100%;
-    left: auto;
     flex-wrap: wrap;
     justify-content: center;
     margin: 12px 0 0;
@@ -182,6 +181,7 @@
 
   .park-page__info {
     position: static;
+    background-color: transparent;
     order: 3;
     width: 100%;
     height: auto;
